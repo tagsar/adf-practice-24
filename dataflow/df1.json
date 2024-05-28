@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "SqlServerTable3",
+						"referenceName": "SqlServerTable5",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -71,6 +71,10 @@
 				"     errors: true) ~> cast1",
 				"cast1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          StateProvinceId as integer,",
+				"          City as integer",
+				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
 				"     updateable:false,",

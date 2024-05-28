@@ -7,7 +7,18 @@
 		},
 		"annotations": [],
 		"type": "SqlServerTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "StateProvinceId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "City",
+				"type": "int",
+				"precision": 10
+			}
+		],
 		"typeProperties": {
 			"schema": "dbo",
 			"table": "df_output"
