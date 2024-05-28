@@ -1436,6 +1436,31 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PowerQuery')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "WranglingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"name": "ProjectDestinationDBAzure",
+							"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~>  ProjectDestinationDBAzure",
+							"dataset": {
+								"referenceName": "ProjectDestinationDBAzure",
+								"type": "DatasetReference"
+							}
+						}
+					],
+					"script": "section Section1;\r\nshared ProjectDestinationDBAzure = let AdfDoc = Sql.Database(\"adf-training-practice.database.windows.net\", \"df_output\", [CreateNavigationProperties = false]), InputTable = AdfDoc{[Schema=\"dbo\",Item=\"ProjectDF_Sink\"]}[Data] in InputTable;\r\nshared UserQuery = let Source = #\"ProjectDestinationDBAzure\",\r\n  #\"Sorted rows\" = Table.Sort(Source, {{\"ProductID\", Order.Ascending}}),\r\n  #\"Added custom 1\" = Table.AddColumn(#\"Sorted rows\", \"Total\", each [Qty] * [ListPrice]),\r\n  #\"Changed column type\" = Table.TransformColumnTypes(#\"Added custom 1\", {{\"Total\", type number}}) in #\"Changed column type\";\r\n",
+					"documentLocale": "en-us"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ProjectDestinationDBAzure')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
