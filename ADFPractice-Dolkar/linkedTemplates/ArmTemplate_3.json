@@ -120,7 +120,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/copydata-dataflow')]",
+			"name": "[concat(parameters('factoryName'), '/Project-copydata-dataflow')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
