@@ -1,0 +1,9 @@
+{
+	"name": "ADFPractice-Dolkar",
+	"location": "southeastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f3d201c7-a3ee-449e-a312-5651e0f27a44",
+		"tenantId": "73cd034b-e4df-44f7-9bae-73ed654fd6e2"
+	}
+}
