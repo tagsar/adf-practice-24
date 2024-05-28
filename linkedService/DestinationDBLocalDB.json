@@ -1,0 +1,21 @@
+{
+	"name": "DestinationDBLocalDB",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "KENKORI\\SQLEXPRESS",
+			"database": "Destination",
+			"encrypt": "optional",
+			"trustServerCertificate": true,
+			"authenticationType": "Windows",
+			"userName": "giriz",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI1ZTdmZmU0My00M2U1LTRiMjctYjUxYS0yNTU0OTZhZGZjMzIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
