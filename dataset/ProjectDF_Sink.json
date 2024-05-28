@@ -1,0 +1,43 @@
+{
+	"name": "ProjectDF_Sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDestination",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "TerritoryName",
+				"type": "varchar"
+			},
+			{
+				"name": "ProductID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ListPrice",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Qty",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ProjectDF_Sink"
+		}
+	}
+}
