@@ -1,0 +1,32 @@
+{
+	"name": "Json2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "part-00000-86e803dc-41fb-4aec-8f06-a5e4218a20fd-c000.json",
+				"container": "internationalsales"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"ProductID": {
+					"type": "integer"
+				},
+				"ProductName": {
+					"type": "string"
+				},
+				"ListPrice": {
+					"type": "integer"
+				}
+			}
+		}
+	}
+}
