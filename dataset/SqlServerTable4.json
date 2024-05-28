@@ -1,0 +1,16 @@
+{
+	"name": "SqlServerTable4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "df_output"
+		}
+	}
+}

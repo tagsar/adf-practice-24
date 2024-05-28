@@ -1,0 +1,84 @@
+{
+	"name": "df1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SqlServerTable3",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SqlServerTable4",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "sort1",
+					"description": "sorting adress based on state province id"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "aggregate1"
+				},
+				{
+					"name": "cast1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          AddressID as integer,",
+				"          AddressLine1 as string,",
+				"          AddressLine2 as string,",
+				"          City as string,",
+				"          StateProvinceID as integer,",
+				"          PostalCode as string,",
+				"          SpatialLocation as binary,",
+				"          rowguid as string,",
+				"          ModifiedDate as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
+				"select1 sort(asc(StateProvinceID, true)) ~> sort1",
+				"source1 select(mapColumn(",
+				"          AddressID,",
+				"          AddressLine1,",
+				"          City,",
+				"          StateProvinceID,",
+				"          PostalCode,",
+				"          ModifiedDate",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"sort1 aggregate(groupBy(StateProvinceID),",
+				"     City = count(City)) ~> aggregate1",
+				"aggregate1 cast(output(",
+				"          City as integer '000'",
+				"     ),",
+				"     errors: true) ~> cast1",
+				"cast1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}
