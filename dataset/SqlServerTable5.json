@@ -18,10 +18,6 @@
 				"type": "nvarchar"
 			},
 			{
-				"name": "AddressLine2",
-				"type": "nvarchar"
-			},
-			{
 				"name": "City",
 				"type": "nvarchar"
 			},
@@ -33,14 +29,6 @@
 			{
 				"name": "PostalCode",
 				"type": "nvarchar"
-			},
-			{
-				"name": "SpatialLocation",
-				"type": "geography"
-			},
-			{
-				"name": "rowguid",
-				"type": "uniqueidentifier"
 			},
 			{
 				"name": "ModifiedDate",

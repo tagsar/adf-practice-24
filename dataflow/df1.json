@@ -31,21 +31,15 @@
 				},
 				{
 					"name": "aggregate1"
-				},
-				{
-					"name": "cast1"
 				}
 			],
 			"scriptLines": [
 				"source(output(",
 				"          AddressID as integer,",
 				"          AddressLine1 as string,",
-				"          AddressLine2 as string,",
 				"          City as string,",
 				"          StateProvinceID as integer,",
 				"          PostalCode as string,",
-				"          SpatialLocation as binary,",
-				"          rowguid as string,",
 				"          ModifiedDate as timestamp",
 				"     ),",
 				"     allowSchemaDrift: true,",
@@ -57,19 +51,15 @@
 				"          AddressID,",
 				"          AddressLine1,",
 				"          City,",
-				"          StateProvinceID,",
 				"          PostalCode,",
+				"          StateProvinceID,",
 				"          ModifiedDate",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"sort1 aggregate(groupBy(StateProvinceID),",
-				"     City = count(City)) ~> aggregate1",
-				"aggregate1 cast(output(",
-				"          City as integer '000'",
-				"     ),",
-				"     errors: true) ~> cast1",
-				"cast1 sink(allowSchemaDrift: true,",
+				"     CityCount = count(City)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          StateProvinceId as integer,",
@@ -81,7 +71,11 @@
 				"     upsertable:false,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          StateProvinceId = StateProvinceID,",
+				"          City = CityCount",
+				"     )) ~> sink1"
 			]
 		}
 	}
