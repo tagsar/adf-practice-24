@@ -8,6 +8,9 @@
 		"AdventureWorksDB_connectionString": {
 			"value": ""
 		},
+		"AdventureWorksDatabase_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage1_connectionString": {
 			"value": ""
 		},
@@ -15,6 +18,12 @@
 			"value": ""
 		},
 		"AzureDestination_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"DestinationDBLocalDB_password": {
 			"value": ""
 		},
 		"SqlServer1_password": {
@@ -26,11 +35,14 @@
 		"SqlServer3_connectionString": {
 			"value": ""
 		},
-		"AdventureWorksDatabase_connectionString": {
-			"value": ""
+		"DestinationDBLocalDB_properties_typeProperties_server": {
+			"value": "KENKORI\\SQLEXPRESS"
 		},
-		"AzureSqlDatabase1_connectionString": {
-			"value": ""
+		"DestinationDBLocalDB_properties_typeProperties_database": {
+			"value": "Destination"
+		},
+		"DestinationDBLocalDB_properties_typeProperties_userName": {
+			"value": "giriz"
 		},
 		"RestService1_properties_typeProperties_url": {
 			"value": "https://dummy.restapiexample.com/api/v1/employee"

@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AdventureWorksDB'"
 		},
+		"AdventureWorksDatabase_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AdventureWorksDatabase'"
+		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
@@ -22,6 +26,14 @@
 		"AzureDestination_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureDestination'"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"DestinationDBLocalDB_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DestinationDBLocalDB'"
 		},
 		"SqlServer1_password": {
 			"type": "secureString",
@@ -35,13 +47,17 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SqlServer3'"
 		},
-		"AdventureWorksDatabase_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AdventureWorksDatabase'"
+		"DestinationDBLocalDB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "KENKORI\\SQLEXPRESS"
 		},
-		"AzureSqlDatabase1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		"DestinationDBLocalDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Destination"
+		},
+		"DestinationDBLocalDB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "giriz"
 		},
 		"RestService1_properties_typeProperties_url": {
 			"type": "string",
@@ -93,6 +109,9 @@
 					"AdventureWorksDB_connectionString": {
 						"value": "[parameters('AdventureWorksDB_connectionString')]"
 					},
+					"AdventureWorksDatabase_connectionString": {
+						"value": "[parameters('AdventureWorksDatabase_connectionString')]"
+					},
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
@@ -102,17 +121,14 @@
 					"AzureDestination_connectionString": {
 						"value": "[parameters('AzureDestination_connectionString')]"
 					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
 					"SqlServer2_connectionString": {
 						"value": "[parameters('SqlServer2_connectionString')]"
 					},
 					"SqlServer3_connectionString": {
 						"value": "[parameters('SqlServer3_connectionString')]"
-					},
-					"AdventureWorksDatabase_connectionString": {
-						"value": "[parameters('AdventureWorksDatabase_connectionString')]"
-					},
-					"AzureSqlDatabase1_connectionString": {
-						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
 					"RestService1_properties_typeProperties_url": {
 						"value": "[parameters('RestService1_properties_typeProperties_url')]"
@@ -137,18 +153,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"SqlServer1_password": {
-						"value": "[parameters('SqlServer1_password')]"
-					},
-					"SqlServer1_properties_typeProperties_server": {
-						"value": "[parameters('SqlServer1_properties_typeProperties_server')]"
-					},
-					"SqlServer1_properties_typeProperties_database": {
-						"value": "[parameters('SqlServer1_properties_typeProperties_database')]"
-					},
-					"SqlServer1_properties_typeProperties_userName": {
-						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -169,6 +173,30 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"DestinationDBLocalDB_password": {
+						"value": "[parameters('DestinationDBLocalDB_password')]"
+					},
+					"SqlServer1_password": {
+						"value": "[parameters('SqlServer1_password')]"
+					},
+					"DestinationDBLocalDB_properties_typeProperties_server": {
+						"value": "[parameters('DestinationDBLocalDB_properties_typeProperties_server')]"
+					},
+					"DestinationDBLocalDB_properties_typeProperties_database": {
+						"value": "[parameters('DestinationDBLocalDB_properties_typeProperties_database')]"
+					},
+					"DestinationDBLocalDB_properties_typeProperties_userName": {
+						"value": "[parameters('DestinationDBLocalDB_properties_typeProperties_userName')]"
+					},
+					"SqlServer1_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_server')]"
+					},
+					"SqlServer1_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_database')]"
+					},
+					"SqlServer1_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
 					}
 				}
 			},
