@@ -36,6 +36,10 @@
 					"items": {
 						"value": "@activity('restapi').output.data",
 						"type": "Expression"
+					},
+					"condition": {
+						"value": "@equals(mod(item().id,2),0)",
+						"type": "Expression"
 					}
 				}
 			},
