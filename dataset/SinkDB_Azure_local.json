@@ -1,0 +1,16 @@
+{
+	"name": "SinkDB_Azure_local",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DestinationDBLocalDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "SalesFromAzure"
+		}
+	}
+}
