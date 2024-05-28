@@ -1,0 +1,23 @@
+{
+	"name": "RestResourceProject",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "restProject",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"userID": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@dataset().userID",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	}
+}
