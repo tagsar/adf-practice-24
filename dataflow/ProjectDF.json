@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "ProjectDF",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -9,13 +9,70 @@
 						"referenceName": "Product",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "Product"
+				},
+				{
+					"dataset": {
+						"referenceName": "ProductListPriceHistory",
+						"type": "DatasetReference"
+					},
+					"name": "ProductListPriceHistory"
+				},
+				{
+					"dataset": {
+						"referenceName": "SalesOrderDetail",
+						"type": "DatasetReference"
+					},
+					"name": "SalesOrderDetail"
+				},
+				{
+					"dataset": {
+						"referenceName": "SalesOrderHeader",
+						"type": "DatasetReference"
+					},
+					"name": "SalesOrderHeader"
+				},
+				{
+					"dataset": {
+						"referenceName": "SalesTerritory",
+						"type": "DatasetReference"
+					},
+					"name": "SalesTerritory"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ProjectDF_Sink",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
+					"name": "join1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "join3"
+				},
+				{
+					"name": "join4"
+				},
+				{
+					"name": "aggregate1"
+				},
+				{
 					"name": "select1"
+				},
+				{
+					"name": "cast1"
 				}
 			],
 			"scriptLines": [
@@ -49,36 +106,141 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> source1",
-				"source1 select(mapColumn(",
+				"     format: 'table') ~> Product",
+				"source(output(",
+				"          ProductID as integer,",
+				"          StartDate as timestamp,",
+				"          EndDate as timestamp,",
+				"          ListPrice as decimal(19,4),",
+				"          ModifiedDate as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> ProductListPriceHistory",
+				"source(output(",
+				"          SalesOrderID as integer,",
+				"          SalesOrderDetailID as integer,",
+				"          CarrierTrackingNumber as string,",
+				"          OrderQty as integer,",
+				"          ProductID as integer,",
+				"          SpecialOfferID as integer,",
+				"          UnitPrice as decimal(19,4),",
+				"          UnitPriceDiscount as decimal(19,4),",
+				"          LineTotal as decimal(38,6),",
+				"          rowguid as string,",
+				"          ModifiedDate as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> SalesOrderDetail",
+				"source(output(",
+				"          SalesOrderID as integer,",
+				"          RevisionNumber as integer,",
+				"          OrderDate as timestamp,",
+				"          DueDate as timestamp,",
+				"          ShipDate as timestamp,",
+				"          Status as integer,",
+				"          OnlineOrderFlag as boolean,",
+				"          SalesOrderNumber as string,",
+				"          PurchaseOrderNumber as string,",
+				"          AccountNumber as string,",
+				"          CustomerID as integer,",
+				"          SalesPersonID as integer,",
+				"          TerritoryID as integer,",
+				"          BillToAddressID as integer,",
+				"          ShipToAddressID as integer,",
+				"          ShipMethodID as integer,",
+				"          CreditCardID as integer,",
+				"          CreditCardApprovalCode as string,",
+				"          CurrencyRateID as integer,",
+				"          SubTotal as decimal(19,4),",
+				"          TaxAmt as decimal(19,4),",
+				"          Freight as decimal(19,4),",
+				"          TotalDue as decimal(19,4),",
+				"          Comment as string,",
+				"          rowguid as string,",
+				"          ModifiedDate as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> SalesOrderHeader",
+				"source(output(",
+				"          TerritoryID as integer,",
+				"          Name as string,",
+				"          CountryRegionCode as string,",
+				"          Group as string,",
+				"          SalesYTD as decimal(19,4),",
+				"          SalesLastYear as decimal(19,4),",
+				"          CostYTD as decimal(19,4),",
+				"          CostLastYear as decimal(19,4),",
+				"          rowguid as string,",
+				"          ModifiedDate as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> SalesTerritory",
+				"Product, ProductListPriceHistory join(select(Product)@ProductID == SelectListPrice@ProductID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 filter(isNull(EndDate)) ~> filter1",
+				"filter1, SalesOrderDetail join(SelectListPrice@ProductID == SalesOrderDetail@ProductID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2",
+				"join2, SalesOrderHeader join(SalesOrderDetail@SalesOrderID == SalesOrderHeader@SalesOrderID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join3",
+				"join3, SalesTerritory join(SalesOrderHeader@TerritoryID == SalesTerritory@TerritoryID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join4",
+				"join4 aggregate(groupBy(SalesTerritory@Name,",
+				"          Product@ProductID,",
+				"          Product@Name,",
+				"          ProductListPriceHistory@ListPrice),",
+				"     Qty = sum(OrderQty),",
+				"          Total = multiply(sum(OrderQty),ProductListPriceHistory@ListPrice)) ~> aggregate1",
+				"aggregate1 select(mapColumn(",
+				"          {Territory Name} = aggregate1@Name,",
 				"          ProductID,",
-				"          Name,",
-				"          ProductNumber,",
-				"          MakeFlag,",
-				"          FinishedGoodsFlag,",
-				"          Color,",
-				"          SafetyStockLevel,",
-				"          ReorderPoint,",
-				"          StandardCost,",
+				"          {Product Name} = aggregate1@Name,",
 				"          ListPrice,",
-				"          Size,",
-				"          SizeUnitMeasureCode,",
-				"          WeightUnitMeasureCode,",
-				"          Weight,",
-				"          DaysToManufacture,",
-				"          ProductLine,",
-				"          Class,",
-				"          Style,",
-				"          ProductSubcategoryID,",
-				"          ProductModelID,",
-				"          SellStartDate,",
-				"          SellEndDate,",
-				"          DiscontinuedDate,",
-				"          rowguid,",
-				"          ModifiedDate",
+				"          Qty,",
+				"          Total",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 cast(output(",
+				"          Qty as integer,",
+				"          Total as decimal(10,0)",
+				"     ),",
+				"     errors: true) ~> cast1",
+				"cast1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          TerritoryName as string,",
+				"          ProductID as integer,",
+				"          ListPrice as decimal(18,0),",
+				"          Qty as integer,",
+				"          Total as decimal(18,0)",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
