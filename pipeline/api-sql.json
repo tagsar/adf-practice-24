@@ -23,8 +23,6 @@
 				"name": "filter data",
 				"description": "filtering the output of the api data based on their id.",
 				"type": "Filter",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "restapi",
@@ -38,21 +36,15 @@
 					"items": {
 						"value": "@activity('restapi').output.data",
 						"type": "Expression"
-					},
-					"condition": {
-						"value": "@lessOrEquals(item().id,3)",
-						"type": "Expression"
 					}
 				}
 			},
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
-						"activity": "filter data ",
+						"activity": "filter data",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -61,7 +53,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('filter data ').output.value",
+						"value": "@activity('filter data').output.value",
 						"type": "Expression"
 					},
 					"isSequential": true,
@@ -90,10 +82,61 @@
 								},
 								"sink": {
 									"type": "SqlServerSink",
+									"preCopyScript": "Truncate table Users",
 									"writeBehavior": "insert",
 									"sqlWriterUseTableLock": false
 								},
-								"enableStaging": false
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['data']['id']"
+											},
+											"sink": {
+												"name": "id",
+												"type": "Int32"
+											}
+										},
+										{
+											"source": {
+												"path": "$['data']['email']"
+											},
+											"sink": {
+												"name": "email",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['data']['first_name']"
+											},
+											"sink": {
+												"name": "first_name",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['data']['last_name']"
+											},
+											"sink": {
+												"name": "last_name",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['data']['avatar']"
+											},
+											"sink": {
+												"name": "avatar",
+												"type": "String"
+											}
+										}
+									]
+								}
 							},
 							"inputs": [
 								{
