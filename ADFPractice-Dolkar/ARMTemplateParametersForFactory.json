@@ -26,6 +26,12 @@
 		"SqlServer3_connectionString": {
 			"value": ""
 		},
+		"AdventureWorksDatabase_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
 		"RestService1_properties_typeProperties_url": {
 			"value": "https://dummy.restapiexample.com/api/v1/employee"
 		},
