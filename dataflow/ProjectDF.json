@@ -6,35 +6,35 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "Product",
+						"referenceName": "ProductAzure",
 						"type": "DatasetReference"
 					},
 					"name": "Product"
 				},
 				{
 					"dataset": {
-						"referenceName": "ProductListPriceHistory",
+						"referenceName": "ProductListPriceHistoryAzure",
 						"type": "DatasetReference"
 					},
 					"name": "ProductListPriceHistory"
 				},
 				{
 					"dataset": {
-						"referenceName": "SalesOrderDetail",
+						"referenceName": "SalesOrderDetailAzure",
 						"type": "DatasetReference"
 					},
 					"name": "SalesOrderDetail"
 				},
 				{
 					"dataset": {
-						"referenceName": "SalesOrderHeader",
+						"referenceName": "SalesOrderHeaderAzure",
 						"type": "DatasetReference"
 					},
 					"name": "SalesOrderHeader"
 				},
 				{
 					"dataset": {
-						"referenceName": "SalesTerritory",
+						"referenceName": "SalesTerritoryAzure",
 						"type": "DatasetReference"
 					},
 					"name": "SalesTerritory"
@@ -43,7 +43,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ProjectDF_Sink",
+						"referenceName": "ProjectDestinationDBAzure",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -274,9 +274,9 @@
 				"     input(",
 				"          TerritoryName as string,",
 				"          ProductID as integer,",
+				"          ProductName as string,",
 				"          ListPrice as decimal(18,0),",
-				"          Qty as integer,",
-				"          Total as decimal(18,0)",
+				"          Qty as integer",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -284,7 +284,8 @@
 				"     upsertable:false,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
 			]
 		}
 	}
