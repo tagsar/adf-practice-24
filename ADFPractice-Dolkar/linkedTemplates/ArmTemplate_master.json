@@ -47,6 +47,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SqlServer3'"
 		},
+		"AzureDestinationDB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureDestinationDB'"
+		},
 		"DestinationDBLocalDB_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "KENKORI\\SQLEXPRESS"
@@ -130,6 +134,9 @@
 					"SqlServer3_connectionString": {
 						"value": "[parameters('SqlServer3_connectionString')]"
 					},
+					"AzureDestinationDB_connectionString": {
+						"value": "[parameters('AzureDestinationDB_connectionString')]"
+					},
 					"RestService1_properties_typeProperties_url": {
 						"value": "[parameters('RestService1_properties_typeProperties_url')]"
 					},
@@ -202,6 +209,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ADFPractice-Dolkar_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "ADFPractice-Dolkar_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADFPractice-Dolkar_ArmTemplate_2')]"
 			]
 		}
 	]

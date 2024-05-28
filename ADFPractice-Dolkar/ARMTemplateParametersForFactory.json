@@ -35,6 +35,9 @@
 		"SqlServer3_connectionString": {
 			"value": ""
 		},
+		"AzureDestinationDB_connectionString": {
+			"value": ""
+		},
 		"DestinationDBLocalDB_properties_typeProperties_server": {
 			"value": "KENKORI\\SQLEXPRESS"
 		},
