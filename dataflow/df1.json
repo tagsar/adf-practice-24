@@ -58,7 +58,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"sort1 aggregate(groupBy(StateProvinceID),",
-				"     CityCount = count(City)) ~> aggregate1",
+				"     City = count(City)) ~> aggregate1",
 				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -74,7 +74,7 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     mapColumn(",
 				"          StateProvinceId = StateProvinceID,",
-				"          City = CityCount",
+				"          City",
 				"     )) ~> sink1"
 			]
 		}
