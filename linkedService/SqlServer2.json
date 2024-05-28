@@ -5,13 +5,8 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"server": "KENKORI\\SQLEXPRESS",
-			"database": "destination",
-			"encrypt": "optional",
-			"trustServerCertificate": false,
-			"authenticationType": "Windows",
-			"userName": "giriz",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIwZjcxYzQ4MS1mZTMyLTQ3NmYtOTQxMy1jNDQ5MmNhYmE3NDkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"connectionString": "integrated security=False;data source=adf-training-practice.database.windows.net;initial catalog=df_output;user id=tagsar",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4YWYwMmU2YS04OWFmLTRkOGYtYWY4MS1kMjllYjdmNDY2ZjMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "integrationRuntime1",
