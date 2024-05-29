@@ -27,6 +27,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureDestination'"
 		},
+		"AzureDestinationDB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureDestinationDB'"
+		},
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
@@ -46,10 +50,6 @@
 		"SqlServer3_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SqlServer3'"
-		},
-		"AzureDestinationDB_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureDestinationDB'"
 		},
 		"DestinationDBLocalDB_properties_typeProperties_server": {
 			"type": "string",
@@ -125,6 +125,9 @@
 					"AzureDestination_connectionString": {
 						"value": "[parameters('AzureDestination_connectionString')]"
 					},
+					"AzureDestinationDB_connectionString": {
+						"value": "[parameters('AzureDestinationDB_connectionString')]"
+					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
@@ -133,9 +136,6 @@
 					},
 					"SqlServer3_connectionString": {
 						"value": "[parameters('SqlServer3_connectionString')]"
-					},
-					"AzureDestinationDB_connectionString": {
-						"value": "[parameters('AzureDestinationDB_connectionString')]"
 					},
 					"RestService1_properties_typeProperties_url": {
 						"value": "[parameters('RestService1_properties_typeProperties_url')]"
